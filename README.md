@@ -1,6 +1,6 @@
 # SNP-cluster
 This is an algorithm program about SNP clustering
-## The snp_cluster.py contains a series of functions for SNP clustering
+## The SNP_cluster.py contains a series of functions for SNP clustering
 ### density():
 For simple density analysis of mutant SNPs on the genome.                                                                       
 ### SNP_anno():
