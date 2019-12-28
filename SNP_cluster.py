@@ -713,11 +713,11 @@ def cluster_out(clust_order,NewClust3Lg,targetClustRev_dic,NewClust2Lg,recomb_lg
         cluster_size.append(int(clust_size))
         clust_lg = the_snp_clust[-1] - the_snp_clust[0] + 1
         clustStr += '%d\t%d\t%d\t%d\t%d\n' % (the_ClustOrder, the_snp_clust[0], the_snp_clust[-1], clust_size, clust_lg)
+    print ("recomb_lg=%d=%d=%d=%d=%.2f" %(recomb_lg,NewClust2Lg,max(cluster_size),min(cluster_size),sum(cluster_size)/len(cluster_size)))
     output_clust = open(clust_out, 'w')
     output_clust.write("ClusterID\tFirstSNP\tLastSNP\tClusterSize\tClusterLength\n")
     output_clust.write(clustStr)
     output_clust.close()
-
 def cluster_Pval(cluster_file,out_file,rate):
     import os
     from scipy import stats
