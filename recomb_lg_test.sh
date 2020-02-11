@@ -78,21 +78,11 @@ export -f func
 
 parallel -j 8 func ::: $(seq $start_num $step_size $end_num) ::: $vcf_file ::: $anno_file ::: $operon_file ::: $rate ::: $dir ::: $scan_loop ::: $max_dist ::: $min_num
 echo "The results of the clustering are saved in the snp_cluster_result"
-grep "recomb_lg" log.txt | awk -F "=" '{print $2}' > colum1
-grep "recomb_lg" log.txt | awk -F "=" '{print $3}' > colum2
-grep "recomb_lg" log.txt | awk -F "=" '{print $4}' > colum3
-grep "recomb_lg" log.txt | awk -F "=" '{print $5}' > colum4
-grep "recomb_lg" log.txt | awk -F "=" '{print $6}' > colum5
-paste colum1 colum2 colum3 colum4 colum5 > recomb.txt
+grep "recomb_lg" log.txt | awk -F "=" '{print $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > recomb.txt
 rm log.txt
-rm colum1
-rm colum2
-rm colum3
-rm colum4
-rm colum5
 echo "The result of the relationship between recombination length and the cluster number are saved in recomb_result.txt"
 echo "Start to run R program and use generalized additive model and linear model to fit the data"
-Rscript Rscript $interv
+Rscript recomb_lg_Rscript $interv
 rm recomb.txt
 echo "The description of the R program is stored in Rcode_log.txt"
 echo "The results of the R program run are saved in Rplots.pdf"
