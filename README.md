@@ -1,22 +1,6 @@
 # SNP-cluster
 This is an algorithm program about SNP clustering
 ## The SNP_cluster.py contains a series of functions for SNP clustering
-### density():
-For simple density analysis of mutant SNPs on the genome.                                                                       
-### SNP_anno():
-Store the annotations for all SNPs and annotateing the target SNP list. 
-### Operon_manage(): 
-handle the operon file including:profile the gene operons,define the range of each gene operon,re-define the gene operons for target SNPs due to the fact that some operons may include several genes,profile the snp list for each operon.
-### clust_initaliz():
-initialize the targetClust_dic
-### SNP_dist():
-Calculate the distance between SNPs
-### cluster_merge(): 
-Merge clusters with neighboring clusters,sorte the clusters.
-### cluster_out():
-Output the result of SNP clustering
-### cluster_Pval():
-Statistical test was conducted on the clustering of SNPs to determine whether it had statistical significance.
 ## The MakeTest.py is the main program
 ### Useage:python MakeTest.py [arguments]
 ### Parameters: [required]
