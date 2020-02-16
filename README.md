@@ -88,6 +88,23 @@ We find that there are many factors that influence the clustering results.Recomb
     -end :      Recombination length used at the ending of clustering.
     -size :     The step size of recombination length.
     -interv:    intervalue is used to obtain the first and second derivatives of the clustering model by using the finite difference method.
-    -scan_loop: the number of scanning times the program will perform for the SNPs. The higher number of scanning will include as many as qualified but ambiguous boundary SNPs into the clusters.  Default value is set to 100, which has been able to perform well.
+    -scan_loop:   the number of scanning times the program will perform for the SNPs. The higher number of scanning will include as many as qualified but ambiguous boundary SNPs into the clusters.  Default value is set to 100, which has been able to perform well.
     -max_dist:    maximum inter-SNP distance allowed within a cluster. This parameter is used to optimize the identified clusters. The SNPs falling into the same gene/gene operon are initially defined to be in the same cluster, which may be longer than the estimated recombination tract length “recomb_lg”. However, multiple gene sweeping events may occur in the same gene/gene operon.  This parameter will split the cluster if any inter-SNP distance is greater than the max_dist_cluster. This value may depend on the specific species. Default value is set to 4000 bp, which should be a good value for bacterial genomes of length ~ 1-3 Mbp.
     -min_num:   minimum number of SNPs per cluster. The default value is set to 2, meaning that each cluster should contain at least 2 SNPs.
+ 
+## The DBCSAN_test_Rscript is used to graph the results of SNP clustering,is referenced in DBSCAN_test.py
+## The DBSCAN_test.py is used to test the effect of different eps and minimum samples SNP clustering results
+### usage: python DBSCAN_test.py [arguments]
+#### {optional arguments}
+    -h, --help            show this help message and exit
+    -vcf VCF              the vcf file
+    -eps_start EPS_START  the start value of eps,The default value is the
+                        minimum of the average distance between SNPS
+    -eps_end EPS_END      the end value of eps,The default value is the maximum
+                        of the average distance between SNPS
+    -sample_start SAMPLE_START
+                        the start value of eps,The default value is 5
+    -sample_end SAMPLE_END
+                        the end value of eps,The default value is 50
+
+    
