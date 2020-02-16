@@ -3,16 +3,16 @@ This is an algorithm program about SNP clustering
 ## The SNP_cluster.py contains a series of functions for SNP clustering
 ## The MakeTest.py is the main program
 ### Useage:Maketest.py [-h] {Density,Cluster,Pval,Dbscan} ...
-####optional arguments:
-  #####-h, --help            show this help message and exit
-####subcommands:
-  #####density or cluster or Pval or Dbscan
-  #####{Density,Cluster,Pval,Dbscan}
-                        #####config subscommand help
-    #####Density             Calculate the density of SNPs
-    #####Cluster             Perform SNPs clustering
-    #####Pval                Calculate the P value of SNP clustering
-    #####Dbscan              The DBSACN method of machine learning was used to
+#### optional arguments:
+  ##### -h, --help            show this help message and exit
+#### subcommands:
+  ##### density or cluster or Pval or Dbscan
+  ##### {Density,Cluster,Pval,Dbscan}
+                        ##### config subscommand help
+    ##### Density             Calculate the density of SNPs
+    ##### Cluster             Perform SNPs clustering
+    ##### Pval                Calculate the P value of SNP clustering
+    ##### Dbscan              The DBSACN method of machine learning was used to
                         cluster SNPS
 
 ### Parameters: [required]
