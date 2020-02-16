@@ -1,0 +1,18 @@
+args=commandArgs(T)
+file_name=args[1]
+library(rgl)
+r3dDefaults$windowRect <- c(0,50, 1000, 1000)
+cat("reading data","\n")
+data=read.table(file_name)
+names(data)<-c("eps","min_sample","cluster_num","aver_std")
+data=data[order(data$eps,data$min_sample),]
+write.table(data,file = "DBSCAN_test_result.txt",sep = "\t",quote = FALSE,row.names = FALSE)
+cat("the data save in DBSCAN_test_result.txt","\n")
+plot3d(data$eps,data$min_sample,data$aver_std)
+rgl.postscript("aver_std.pdf",fmt = 'pdf')
+writeWebGL(filename = "webGL","aver_std.html")
+plot3d(data$eps,data$min_sample,data$cluster_num)
+rgl.postscript("cluster_num.pdf",fmt = 'pdf')
+writeWebGL(filename = "webGL","cluster_num.html")
+cat("The pdf file of three-dimensional scatter plot of eps,min_sample and the mean of standard deviation save in aver_std.pdf","\n")
+cat("The pdf file of three-dimensional scatter plot of eps,min_sample and the numbers of cluster save in cluster_num.pdf","\n")
