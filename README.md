@@ -8,11 +8,11 @@ This is an algorithm program about SNP clustering
 #### subcommands:
   ##### density or cluster or Pval or Dbscan
   ##### {Density,Cluster,Pval,Dbscan}
-                        ##### config subscommand help
-    ##### Density             Calculate the density of SNPs
-    ##### Cluster             Perform SNPs clustering
-    ##### Pval                Calculate the P value of SNP clustering
-    ##### Dbscan              The DBSACN method of machine learning was used to
+                        config subscommand help
+    Density             Calculate the density of SNPs
+    Cluster             Perform SNPs clustering
+    Pval                Calculate the P value of SNP clustering
+    Dbscan              The DBSACN method of machine learning was used to
                         cluster SNPS
 
 ### Parameters: [required]
