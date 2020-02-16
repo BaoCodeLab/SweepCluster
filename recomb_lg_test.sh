@@ -23,10 +23,6 @@ do
 			operon_file=$2
 			echo "The operon file is $2"
 			shift ;;
-		-rate) param="$2"
-			rate=$2
-			echo "The mutation rate is $2"
-			shift ;;
 		-start) param="$2"
 			start_num=$2
 			echo "The start recombination length is $2"
@@ -75,11 +71,11 @@ echo "Start running SNP clustering in parallel"
 echo $(seq $start_num $step_size $end_num)
 func()
 {
-	python MakeTest.py -AnalType cluster -input $2 -anno $3 -operon $4 -recomb_lg $1 -rate $5 -output $6/snp_cluster_result/clust_out_$1  -scan_loop $7 -max_dist $8 -min_num $9>>log.txt
+	python MakeTest.py Cluster -input $2 -anno $3 -operon $4 -recomb_lg $1 -output $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8>>log.txt
 }
 export -f func
 
-parallel -j 8 func ::: $(seq $start_num $step_size $end_num) ::: $vcf_file ::: $anno_file ::: $operon_file ::: $rate ::: $dir ::: $scan_loop ::: $max_dist ::: $min_num
+parallel -j 8 func ::: $(seq $start_num $step_size $end_num) ::: $vcf_file ::: $anno_file ::: $operon_file ::: $dir ::: $scan_loop ::: $max_dist ::: $min_num
 echo "The results of the clustering are saved in the snp_cluster_result"
 grep "recomb_lg" log.txt | awk -F "=" '{print $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6}' > recomb.txt
 rm log.txt
