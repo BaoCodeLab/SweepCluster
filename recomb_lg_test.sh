@@ -7,10 +7,6 @@ echo
 while [ -n "$1" ]
 do
 	case "$1" in
-		-h)
-                        echo "recomb_lg_test.sh -vcf vcf_file -anno anno_file -operon operon_file -rate mutation_rate -start recomb_lg_start -end recomb_lg_end -size recomb_lg_step_size -interv gam_model_interv_value "
-			exit 10
-                        shift;;
 		-vcf)	param="$2"
 			vcf_file=$2
 			echo "The vcf file is $2"
@@ -71,7 +67,7 @@ echo "Start running SNP clustering in parallel"
 echo $(seq $start_num $step_size $end_num)
 func()
 {
-	python MakeTest.py Cluster -input $2 -anno $3 -operon $4 -recomb_lg $1 -output $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8>>log.txt
+	python MakeTest.py cluster -vcf $2 -anno $3 -operon $4 -recomb_lg $1 -output $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8>>log.txt
 }
 export -f func
 
