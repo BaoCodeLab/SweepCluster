@@ -128,6 +128,6 @@ def DBSCAN_test(args):
     for eps in range(eps_start,eps_end,size):
         pool.starmap(cal_std,[(eps,min_sample,loc) for min_sample in range(sample_start,sample_end,5)])
     pool.close()
-    os.system('Rscript ./library/DBSCAN_test_Rscript log.txt')
+    os.system('Rscript ./library/DBSCAN_simulation_Rscript log.txt')
     
     
