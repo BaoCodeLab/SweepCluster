@@ -1,8 +1,7 @@
 # SweepCluster
 This is a program for SNP clustering based on the Anchor-extension method.
 
-## The SNP_cluster.py contains a series of functions for SNP clustering
-## The MakeTest.py is the main program
+## The Main.py is the main program
 ### Useage:Maketest.py [-h] {Density,Cluster,Pval,Dbscan} ...
 #### optional arguments:
   ##### -h, --help            show this help message and exit
