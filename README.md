@@ -77,9 +77,9 @@ This is a program for SNP clustering based on the Anchor-extension method.
     -out OUT              the output file
 
 
-## The recomb_lg_test.sh is used to test the effect of different recombination length SNP clustering results
+## The recomb_lg_simulation.sh is used to test the effect of different recombination length SNP clustering results
 We find that there are many factors that influence the clustering results.Recombination length has the greatest effect, which directly affects the number of cluster
-### Useage:./recomb_lg_test.sh [arguments]
+### Useage:./recomb_lg_simulation.sh [arguments]
 #### {optional arguments}
     -vcf:     the vcf file
     -anno:    tab-delimited file containing the annotations for the SNPs, with four columns, SNP locations, SNP coding types, the gene name where the SNP is located, and the corresponding gene ID. SNP coding types include: “CDS_synon” for synonymous SNPs; “CDS_nonSynon” for non-synonymous SNPs; “pseudo-gene” for SNPs in pseudogene; “inter-gene” for inter-genic SNPs.  Among the four types, non-synonymous SNPs should be defined as “CDS_nonSynon” because the keyword “CDS_nonSynon” will be used in SNP clustering. Other types could be defined as what you like. gene name and gene ID could be blank if the SNP is inter-genic; or alternatively, could be defined specifically, such as -gene1-gene2 indicating the presence of the SNP in the inter-genic region between gene1 and gene2.An example looks like below:260680  CDS_nonSynon oppD  AP53_241.The first row should be Loc  Type  Gene_Name Gene_ID
@@ -92,8 +92,8 @@ We find that there are many factors that influence the clustering results.Recomb
     -max_dist:    maximum inter-SNP distance allowed within a cluster. This parameter is used to optimize the identified clusters. The SNPs falling into the same gene/gene operon are initially defined to be in the same cluster, which may be longer than the estimated recombination tract length “recomb_lg”. However, multiple gene sweeping events may occur in the same gene/gene operon.  This parameter will split the cluster if any inter-SNP distance is greater than the max_dist_cluster. This value may depend on the specific species. Default value is set to 4000 bp, which should be a good value for bacterial genomes of length ~ 1-3 Mbp.
     -min_num:   minimum number of SNPs per cluster. The default value is set to 2, meaning that each cluster should contain at least 2 SNPs.
  
-## The DBSCAN_test.py is used to test the effect of different eps and minimum samples SNP clustering results
-### usage: python DBSCAN_test.py [arguments]
+## The DBSCAN_simulation.py is used to test the effect of different eps and minimum samples SNP clustering results
+### usage: python DBSCAN_simulation.py [arguments]
 #### {optional arguments}
     -h, --help            show this help message and exit
     -vcf VCF              the vcf file
