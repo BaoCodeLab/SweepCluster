@@ -1,7 +1,10 @@
+library(rgl)
+
 args=commandArgs(T)
 file_name=args[1]
-library(rgl)
+
 r3dDefaults$windowRect <- c(0,50, 1000, 1000)
+
 cat("reading data","\n")
 data=read.table(file_name)
 names(data)<-c("eps","min_sample","cluster_num","aver_std")
