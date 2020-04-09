@@ -6,6 +6,8 @@ import vcf
 import argparse
 import sys
 import os
+
+
 def DBSCAN_test(args):
     pars = argparse.ArgumentParser()
     pars.add_argument("-vcf", required=True, help="the vcf file")
@@ -14,40 +16,47 @@ def DBSCAN_test(args):
     pars.add_argument("-sample_start", help="the start value of eps,The default value is 5")
     pars.add_argument("-sample_end", help="the end value of eps,The default value is 50")
     args = pars.parse_args()
+    
     if args.vcf:
         input_dx = sys.argv.index("-vcf")
         vcf_file = sys.argv[input_dx + 1]
     else:
         raise Exception("Please input the vcf file!")
+        
     if args.eps_start:
         eps_start_dx = sys.argv.index("-eps_start")
         eps_start = int(sys.argv[eps_start_dx + 1])
     else:
         print("No eps_start is provided; the minimum of the average distance between SNPS will be used!")
         eps_start=0
+        
     if args.eps_end:
         eps_end_dx = sys.argv.index("-eps_end")
         eps_end = int(sys.argv[eps_end_dx + 1])
     else:
         print("No eps_end is provided; the maximum of the average distance between SNPS will be used!")
         eps_end=0
+        
     if args.sample_start:
         sample_start_dx = sys.argv.index("-sample_start")
         sample_start = int(sys.argv[sample_start_dx + 1])
     else:
         print("No min_sample start is provided; default value of 5 will be used!")
         sample_start=5
+        
     if args.sample_end:
         sample_end_dx = sys.argv.index("-sample_end")
         sample_end = int(sys.argv[sample_end_dx + 1])
     else:
         print("No min_sample end is provided; default value of 50 will be used!")
         sample_end=50
+        
     vcf_reader=vcf.Reader(filename =vcf_file)
     loc=[]
     for record in vcf_reader:
         loc.append(record.POS)
     loc.sort()
+    
     #Calculate the distance between the two SNPS
     one_list=[]
     two_list=[]
@@ -55,14 +64,17 @@ def DBSCAN_test(args):
         one_list.append(loc[i])
     for i in range(0,len(loc),2):
         two_list.append(loc[i])
+        
     if(len(one_list)>len(two_list)):
         one_list=one_list[0:-1]
     else:
         two_list=two_list[0:-1]
+        
     snp_dist=[]
     for i in range(0,len(one_list)):
         dist=one_list[i]-two_list[i]
         snp_dist.append(dist)
+        
     #Calculate the mean distance between SNPS, the maximum distance and the minimum distance
     size=2000
     num_list=[]
@@ -75,12 +87,14 @@ def DBSCAN_test(args):
             dist_sum+=snp_dist[index]
         aver=dist_sum*1.0/size
         aver_list.append(aver)
+        
     if(eps_start!=0):
         eps_start=int(min(aver_list))
         print("The minimum of the average distance of SNPS is:",min(aver_list))
     if(eps_end!=0):
         eps_end=int(max(aver_list))
         print("The maximum of the average distance of SNPs is :",max(aver_list))
+        
     total_sum=0
     for i in aver_list:
         total_sum+=i
@@ -88,6 +102,7 @@ def DBSCAN_test(args):
     size=int((eps_end-eps_start)/50)
     loc=np.array(loc)
     x=loc.reshape(-1,1)
+    
     def cal_std(eps,min_sample,loc):
         y_pred = DBSCAN(eps= eps, min_samples = min_sample).fit_predict(x)
         cluster_num=(max(y_pred))
@@ -107,9 +122,12 @@ def DBSCAN_test(args):
             aver_std=(std_sum/cluster_num)
         with open(r"log.txt","a+") as f:
             print("%d\t%d\t%d\t%.3f" %(eps,min_sample,cluster_num,aver_std),file=f)
+            
     pool = mp.Pool(mp.cpu_count())
     print(pool)
     for eps in range(eps_start,eps_end,size):
         pool.starmap(cal_std,[(eps,min_sample,loc) for min_sample in range(sample_start,sample_end,5)])
     pool.close()
     os.system('Rscript ./library/DBSCAN_test_Rscript log.txt')
+    
+    
