@@ -45,9 +45,9 @@ if __name__=="__main__":
     ###### Defines the parameters of the subprocess for clusterting the SNPs by DBSCAN
     DBSCAN_parser=subparsers.add_parser("DBSCAN",help="use the machine learning method DBSACN for SNP clustering")
     DBSCAN_parser.add_argument("-vcf", required=True, help="the vcf file containing the SNPs")
-    DBSCAN_parser.add_argument("-eps",required=True,help="ϵ - neighborhood distance threshold, and the sample is more than ϵ sample points is not in the neighborhood.")
-    DBSCAN_parser.add_argument("-min_sample",required=True,help="Sample points to be a core object need ϵ - neighborhood sample threshold.")
+    DBSCAN_parser.add_argument("-eps",required=True,help="ϵ - neighborhood distance threshold, two samples are considered to be neighborhood if their distance is within ϵ")
+    DBSCAN_parser.add_argument("-min_sample",required=True,help="neighborhood samples threshold, the minimum number of samples in a neighborhood for them to be considered as a core object")
     DBSCAN_parser.add_argument("-out",required=True,help="the output file")
     DBSCAN_parser.set_defaults(func=DBSCA)
     args = parser.parse_args()
-    args.func(args)
+    args.func(args
