@@ -6,10 +6,11 @@ from library.Dbscan import DBSCA
 
 
 if __name__=="__main__":
-    ###Defines the parameters of the subprocess for calculating the SNPs density
+    ### Defines the parameters of the subprocess for calculating SNP density
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(title="subcommands",description="density or cluster or Pval or DBSCAN",help="config subscommand help")
     density_parser=subparsers.add_parser("density",help="Calculate the density of SNPs")
+    
     density_parser.add_argument("-vcf", required=True, help="the vcf file")
     density_parser.add_argument("-out", required=True, help="the output file")
     density_parser.add_argument("-scale", help="the value for normalization of the SNP density")
@@ -18,8 +19,10 @@ if __name__=="__main__":
     density_parser.add_argument("-ws", help="the window size of the sliding window method")
     density_parser.set_defaults(func=density)
 
-    ###Defines the parameters of the subprocess for  the SNPs clustering
+    
+    ### Defines the parameters of the subprocess for SNP clustering
     cluster_parser=subparsers.add_parser("cluster",help="Perform SNPs clustering")
+    
     cluster_parser.add_argument("-vcf", required=True, help="the vcf file")
     cluster_parser.add_argument("-cluster", required=True, help="the output file of clustering result")
     cluster_parser.add_argument("-snp", required=True, help="the output file of snp after clustering")
@@ -31,15 +34,19 @@ if __name__=="__main__":
     cluster_parser.add_argument("-min_num", help=" minimum number of SNPs per cluster.The default value is set to 2.")
     cluster_parser.set_defaults(func=cluster)
 
-    ###Defines the parameters of the subprocess for calculating the SNPs cluster P value
-    Pval_parser=subparsers.add_parser("Pval",help="Calculate the P value of SNP clustering")
-    Pval_parser.add_argument("-cluster", required=True, help="the snp clustering file")
+    
+    ### Defines the parameters of the subprocess for calculating SNPs cluster p-value
+    Pval_parser=subparsers.add_parser("Pval",help="Calculate the p-value of SNP clusters")
+    
+    Pval_parser.add_argument("-cluster", required=True, help="the snp cluster output file")
     Pval_parser.add_argument("-out", required=True,help="the output file .")
     Pval_parser.add_argument("-rate",required=True,help="it is a pre-estimated average mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.")
     Pval_parser.set_defaults(func=Pval)
 
-    ######Defines the parameters of the subprocess for clusterting the SNPs by DBSCAN
-    DBSCAN_parser=subparsers.add_parser("DBSCAN",help="The DBSACN method of machine learning was used to cluster SNPS")
+    
+    ###### Defines the parameters of the subprocess for clusterting the SNPs by DBSCAN
+    DBSCAN_parser=subparsers.add_parser("DBSCAN",help="Use the machine learning method DBSACN to cluster SNPS")
+    
     DBSCAN_parser.add_argument("-vcf", required=True, help="the vcf file")
     DBSCAN_parser.add_argument("-eps",required=True,help="ϵ - neighborhood distance threshold, and the sample is more than ϵ sample points is not in the neighborhood.")
     DBSCAN_parser.add_argument("-min_sample",required=True,help="Sample points to be a core object need ϵ - neighborhood sample threshold.")
