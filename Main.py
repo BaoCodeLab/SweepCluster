@@ -50,4 +50,4 @@ if __name__=="__main__":
     DBSCAN_parser.add_argument("-out",required=True,help="the output file")
     DBSCAN_parser.set_defaults(func=DBSCA)
     args = parser.parse_args()
-    args.func(args
+    args.func(args)
