@@ -84,7 +84,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     
 ### The shell script sweep_lg_simulation.sh is a driver program for simulating the effect of different sweep length on SNP clustering results.
 We found that many factors influence the clustering results. Sweep length is the most influential one. We evaluate the effect by simulating the dynamics of the number of clusters against the sweep length based on generalized additive model. 
-### Useage:  sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]  [-min_num MIN_NUM] 
+#### Usage:  sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]  [-min_num MIN_NUM] 
 
 #### {arguments}
     -vcf VCF              The vcf file
@@ -99,7 +99,7 @@ We found that many factors influence the clustering results. Sweep length is the
     -min_num MIN_NUM      Minimum number of SNPs per cluster. The default value is set to 2.
  
 ### The DBSCAN_simulation.py is a driver script for simulating the effect of eps and min_num on SNP clustering using Dbscan method.
-### Usage:  DBSCAN_simulation.py -vcf VCF [-eps_start EPS_START] [-eps_end EPS_END] [-min_start MIN_START] [-min_end MIN_END]
+#### Usage:  DBSCAN_simulation.py -vcf VCF [-eps_start EPS_START] [-eps_end EPS_END] [-min_start MIN_START] [-min_end MIN_END]
 #### {arguments}
     -h, --help             Show the help message and exit.
     -vcf VCF               The vcf file.
