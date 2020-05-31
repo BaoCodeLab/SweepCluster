@@ -3,7 +3,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 
 ## Install
 ### Requirements
-  * Python 2.7+, but Python 3.7+ is recommended。
+  * Python 2.7+, but Python 3.7+ is recommended.
   * scipy
   * numpy 
   * pandas  
