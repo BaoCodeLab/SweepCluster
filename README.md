@@ -1,7 +1,7 @@
 # SweepCluster
-This is a program for SNP clustering based on the Anchor-extension method.
+SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
-## The Main.py is the main program
+## The SweepCluster.py is the main program
 ### Useage:Maketest.py [-h] {Density,Cluster,Pval,Dbscan} ...
 #### optional arguments:
   ##### -h, --help            show this help message and exit
@@ -9,11 +9,11 @@ This is a program for SNP clustering based on the Anchor-extension method.
   ##### density or cluster or Pval or Dbscan
   ##### {Density,Cluster,Pval,Dbscan}
                         config subscommand help
-    Density             Calculate the density of SNPs
-    Cluster             Perform SNPs clustering
-    Pval                Calculate the P value of SNP clustering
-    Dbscan              The DBSACN method of machine learning was used to
-                        cluster SNPS
+    Density             Calculate the density of SNPs on the genome
+    Cluster             Perform SNP clustering
+    Pval                Calculate the significance p-value of SNP clustering
+    Dbscan              The machine learning python module DBSACN was used to
+                        cluster SNPs
 
 ### subcommands[Density]:
 #### usage: Maketest.py Density [-h] -vcf VCF -out OUT [-scale SCALE]
