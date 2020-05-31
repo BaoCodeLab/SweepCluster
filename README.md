@@ -30,21 +30,29 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 #### SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
 
 #### {arguments}
-    -h, --help            show this help message and exit
-    -vcf VCF              the vcf file
-    -cluster CLUSTER      the output file of clustering result
-    -snp   SNP            the output file of snps after clustering
-    -anno ANNO            tab-delimited file containing the annotations for the SNPs
-    -operon OPERON        tab-delimited file defining the gene operons, 
-    -recomb_lg RECOMB_LG  the estimated average recombination tract length for the genome. This value should be estimated before the running of SNP clustering, using ClonalFrame or other algorithms. 
-    -scan_loop SCAN_LOOP   the number of scanning times the program will perform for the SNPs. The higher number of scanning will include as many as qualified but ambiguous boundary SNPs into the clusters.  Default value is set to 100, which has been able to perform well.
-    -min_num MIN_NUM      minimum number of SNPs per cluster. The default value is set to 2, meaning that each cluster should contain at least 2 SNPs.
-     -max_dist MAX_DIST   maximum inter-SNP distance allowed within a cluster. This parameter is used to optimize the identified clusters. The SNPs falling into the same gene/gene operon are initially defined to be in the same cluster, which may be longer than the estimated recombination tract length “recomb_lg”. However, multiple gene sweeping events may occur in the same gene/gene operon.  This parameter will split the cluster if any inter-SNP distance is greater than the max_dist_cluster. This value may depend on the specific species. Default value is set to 4000 bp, which should be a good value for bacterial genomes of length ~ 1-3 Mbp.
+    -h, --help            Show the help message and exit.
+    -vcf VCF              The vcf file.
+    -cluster CLUSTER      The output file of clustering result.
+    -snp   SNP            The output file of snps after clustering.
+    -anno ANNO            Tab-delimited file containing the annotations for the SNPs.
+    -operon OPERON        Tab-delimited file defining the gene operons.
+    -recomb_lg RECOMB_LG  The estimated average recombination tract length for the genome. 
+    -scan_loop SCAN_LOOP  The number of iterations the program will perform for merging clusters. Default value is set to 100.
+    -min_num MIN_NUM      Minimum number of SNPs per cluster. Default value is set to 2.
+     -max_dist MAX_DIST   Maximum inter-SNP distances allowed within a cluster.
     
-####    The SNP annotation file should contains four columns, i.e., SNP locations, SNP coding types, the gene name where the SNP is located, and the corresponding gene ID. SNP coding types include: “CDS_synon” for synonymous SNPs; “CDS_nonSynon” for non-synonymous SNPs; “pseudo-gene” for SNPs in pseudogene; “inter-gene” for inter-genic SNPs.  Among the four types, non-synonymous SNPs should be defined as “CDS_nonSynon” because the keyword “CDS_nonSynon” will be used in SNP clustering. Other types could be defined as what you like. gene name and gene ID could be blank if the SNP is inter-genic; or alternatively, could be defined specifically, such as -gene1-gene2 indicating the presence of the SNP in the inter-genic region between gene1 and gene2.An example looks like below:260680  CDS_nonSynon oppD  AP53_241.The first row should be Loc  Type  Gene_Name Gene_ID
+####    The SNP annotation file should contain four columns, i.e., SNP locations, SNP coding types, Gene name, and Gene ID. SNP coding types include: “CDS_synon” for synonymous SNPs; “CDS_nonSynon” for non-synonymous SNPs; “pseudo-gene” for SNPs in pseudogene; “inter-gene” for inter-genic SNPs.  Among the four types, non-synonymous SNPs should be defined as “CDS_nonSynon” because the keyword “CDS_nonSynon” will be used in SNP clustering. Other types could be defined as what you like. Gene name and Gene ID could be blank if the SNP is inter-genic; or alternatively, could be defined specifically, such as gene1-gene2, indicating the location of the SNP in the inter-genic region between gene1 and gene2. An example looks like below:
+       260680    CDS_nonSynon    oppC   gene241
+       261541    CDS_synon       oppD   gene242
+       261592    CDS_synon       oppD   gene242
+       261883    inter-gene      -      gene242-gene243
+       261896    inter-gene      -      gene242-gene243
+       262321    CDS_synon       oppF   gene243
+       
 ####   The operon file defines the genes in each operon with one line for each gene. Each gene contains five columns for gene ID, the start location of the gene, the end location of the gene, the orientation of the gene, and the operon name the gene belongs to. If the gene operons of the genome have not yet defined well, the column of operon name could be replaced by the gene ID. However, the well-defined gene operons will be helpful for SNP clustering. An example looks like below:AP53_107  121551  122138  + Operon_30.
 ####    The average recombination tract length can be estimated using the independent tools, such as ClonalFrame, or can be optimized using the script "recomb_lg_simulation.sh" in the package. 
 ####    The maximum inter-SNP distance is used to optimize the identified clusters. The SNPs falling into the same gene/gene operon are initially defined to be in the same cluster, which may be longer than the estimated recombination tract length “recomb_lg”. However, multiple gene sweeping events may occur in the same gene/gene operon.  This parameter will split the cluster if any inter-SNP distance is greater than the max_dist. This value may depend on the specific species. Default value is set to 4000 bp, which should be a good value for bacterial genomes of length ~ 1-3 Mbp.
+    
 
 ### subcommands[Pval]:
 #### usage: Maketest.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
