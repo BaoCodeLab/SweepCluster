@@ -1,12 +1,11 @@
 # SweepCluster
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
-## Running SweepCluster.py 
+## Running SweepCluster
 ### SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan} 
-#### optional arguments:
-  ##### -h, --help            show this help message and exit
-#### functions
-                        
+
+#### Command line usage                        
+    -h, --help          show the help message
     Density             Calculate the SNP density on the genome
     Cluster             Perform SNP clustering
     Pval                Calculate the significance p-value of SNP clustering
@@ -14,17 +13,16 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
                         cluster SNPs
 
 ### Calculate the SNP density
-#### SweepCluster.py Density [-h] -vcf VCF -out OUT [-scale SCALE]
-                           [-total TOTAL] [-step STEP] [-ws WS]
+#### SweepCluster.py Density [-h] -vcf VCF -out OUT [-scale SCALE] -step STEP -win WINDOW -length LENGTH  
 
-#### {optional arguments}
+#### {arguments}
     -h, --help    show this help message and exit
     -vcf VCF      the vcf file
     -out OUT      the output file
     -scale SCALE  the value for normalization of the SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.
-    -total TOTAL  the total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.
+    -length LENGTH  the total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.
     -step STEP    the step size of the sliding window method. If not defined, default value of 300 will be used.
-    -ws WS        the window size of the sliding window method. If not defined, default value of 2000 will be used.
+    -win WINDOW        the window size of the sliding window method. If not defined, default value of 2000 will be used.
  
 
 
