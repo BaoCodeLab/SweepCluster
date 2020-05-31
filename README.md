@@ -5,24 +5,24 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 ### Usage: SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan}
 
 #### Command line usage                        
-    -h, --help          show the help message
-    Density             Calculate the SNP density on the genome
-    Cluster             Perform SNP clustering
-    Pval                Calculate the significance p-value of SNP clustering
+    -h, --help          Whow the help message.
+    Density             Calculate the SNP density on the genome.
+    Cluster             Perform SNP clustering.
+    Pval                Calculate the significance p-value of SNP clustering.
     Dbscan              The machine learning python module DBSACN was used to
-                        cluster SNPs
+                        cluster SNPs.
 
 ### Calculate SNP density using the sliding window method
 #### Usage: SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
 
 #### {arguments}
-    -h, --help      show this help message and exit
-    -vcf VCF        the vcf file
-    -out OUT        the output file
-    -scale SCALE    the value for normalization of SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.
-    -length LENGTH  the total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.
-    -step STEP      the step size of the sliding window method. If not defined, default value of 300 will be used.
-    -win WINDOW     the window size of the sliding window method. If not defined, default value of 2000 will be used.
+    -h, --help      Show the help message and exit.
+    -vcf VCF        The vcf file.
+    -out OUT        The output file.
+    -scale SCALE    The value for normalization of SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.
+    -length LENGTH  The total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.
+    -step STEP      The step size of the sliding window method. If not defined, default value of 300 will be used.
+    -win WINDOW     The window size of the sliding window method. If not defined, default value of 2000 will be used.
  
 
 
@@ -58,33 +58,29 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
        gene112   128757   129668   ‐   Operon_32
 
 ####   The average sweeping length can be simulated and optimized using the script "sweep_lg_simulation.sh" in the package. 
-####    The maximum inter-SNP distance is used to optimize the identification of clusters. Multiple gene sweeping events with large distances may occur in the same gene/gene operon. This parameter will split the cluster if any inter-SNP distance is greater than the specified threshold. This value may depend on the specific species. Default value is set to 1000 bp, which should be a good value for bacterial genomes.
+####   The maximum inter-SNP distance is used to optimize the identification of clusters. Multiple gene sweeping events with large distances may occur in the same gene/gene operon. This parameter will split the cluster if any inter-SNP distance is greater than the specified threshold. This value may depend on the specific species. Default value is set to 1000 bp, which should be a good value for bacterial genomes.
     
 
 ### Estimate the significance p-value of each cluster based on a gamma distribution model of SNPs
-#### usage: SweepCluster.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
+#### Usage: SweepCluster.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
 
 #### {arguments}
-    -h, --help        Show the help message and exit
-    -cluster CLUSTER  The snp clustering file
+    -h, --help        Show the help message and exit.
+    -cluster CLUSTER  The snp clustering result file.
     -out OUT          The output file.
     -rate RATE        The pre-estimated mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.
 
 
 
-### subcommands[Dbscan]:
-#### usage: Maketest.py Dbscan [-h] -vcf VCF -eps EPS -min_sample MIN_SAMPLE -out
-                          OUT
+### Use python module Dbscan to perform blind snp clustering without considering SNP annotation
+#### Usage: SweepCluster.py Dbscan [-h] -vcf VCF -eps EPS -min_sample MIN_SAMPLE -out OUT
 
-#### optional arguments:
-    -h, --help            show this help message and exit
-    -vcf VCF              the vcf file
-    -eps EPS              ϵ - neighborhood distance threshold, and the sample is
-                        more than ϵ sample points is not in the neighborhood.
-    -min_sample MIN_SAMPLE
-                        Sample points to be a core object need ϵ -
-                        neighborhood sample threshold.
-    -out OUT              the output file
+#### {arguments}
+    -h, --help          Show the help message and exit.
+    -vcf VCF            The vcf file.
+    -eps EPS            ϵ - The neighborhood distance threshold for any two SNPs.
+    -min_num MIN_NUM    Minimum number of SNPs in a neighborhood for a SNP to be considered as a core SNP.
+    -out OUT            The output file.
 
 
 ## The recomb_lg_simulation.sh is used to test the effect of different recombination length SNP clustering results
