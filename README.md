@@ -2,7 +2,7 @@
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
 ## Running SweepCluster
-### SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan} 
+### Usage: SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan} 
 
 #### Command line usage                        
     -h, --help          show the help message
@@ -13,7 +13,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
                         cluster SNPs
 
 ### Calculate SNP density using the sliding window method
-#### SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
+#### Usage: SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
 
 #### {arguments}
     -h, --help      show this help message and exit
@@ -26,8 +26,8 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
  
 
 
-### Perform SNP clustering using anchor-extension method
-#### SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
+###  Perform SNP clustering using anchor-extension method
+#### Usage: SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
 
 #### {arguments}
     -h, --help            Show the help message and exit.
@@ -41,7 +41,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     -min_num MIN_NUM      Minimum number of SNPs per cluster. Default value is set to 2.
      -max_dist MAX_DIST   Maximum inter-SNP distances allowed within a cluster.
     
-####    The SNP annotation file should contain four columns, i.e., SNP locations, SNP coding types, Gene name, and Gene ID. SNP coding types include: “CDS_synon” for synonymous SNPs; “CDS_nonSynon” for non-synonymous SNPs; “pseudo-gene” for SNPs in pseudogene; “inter-gene” for inter-genic SNPs.  Among the four types, non-synonymous SNPs should be defined as “CDS_nonSynon” because the keyword “CDS_nonSynon” will be used in SNP clustering. Other types could be defined as what you like. Gene name and Gene ID could be blank if the SNP is inter-genic; or alternatively, could be defined specifically, such as gene1-gene2, indicating the location of the SNP in the inter-genic region between gene1 and gene2. An example looks like below:
+####   The SNP annotation file should contain four columns, i.e., SNP locations, SNP coding types, Gene name, and Gene ID. SNP coding types include: “CDS_synon” for synonymous SNPs; “CDS_nonSynon” for non-synonymous SNPs; “pseudo-gene” for SNPs in pseudogene; “inter-gene” for inter-genic SNPs.  Among the four types, non-synonymous SNPs should be defined as “CDS_nonSynon” because the keyword “CDS_nonSynon” will be used in SNP clustering. Other types could be defined as what you like. Gene name and Gene ID could be blank if the SNP is inter-genic; or alternatively, could be defined specifically, such as gene1-gene2, indicating the location of the SNP in the inter-genic region between gene1 and gene2. An example looks like below:
        260680    CDS_nonSynon    oppC   gene241
        261541    CDS_synon       oppD   gene242
        261592    CDS_synon       oppD   gene242
@@ -49,9 +49,16 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
        261896    inter-gene      -      gene242-gene243
        262321    CDS_synon       oppF   gene243
        
-####   The operon file defines the genes in each operon with one line for each gene. Each gene contains five columns for gene ID, the start location of the gene, the end location of the gene, the orientation of the gene, and the operon name the gene belongs to. If the gene operons of the genome have not yet defined well, the column of operon name could be replaced by the gene ID. However, the well-defined gene operons will be helpful for SNP clustering. An example looks like below:AP53_107  121551  122138  + Operon_30.
-####    The average recombination tract length can be estimated using the independent tools, such as ClonalFrame, or can be optimized using the script "recomb_lg_simulation.sh" in the package. 
-####    The maximum inter-SNP distance is used to optimize the identified clusters. The SNPs falling into the same gene/gene operon are initially defined to be in the same cluster, which may be longer than the estimated recombination tract length “recomb_lg”. However, multiple gene sweeping events may occur in the same gene/gene operon.  This parameter will split the cluster if any inter-SNP distance is greater than the max_dist. This value may depend on the specific species. Default value is set to 4000 bp, which should be a good value for bacterial genomes of length ~ 1-3 Mbp.
+####   The operon file defines the genes in each operon with one line for each gene. Each gene contains five columns, i.e., gene ID, the start location of the gene, the end location of the gene, the orientation of the gene, and the operon ID the gene belongs to. If the gene operons of the genome have not yet defined well, the column of operon ID could be replaced by the gene ID. However, the well-defined gene operons will be helpful for SNP clustering. 
+       gene107   121551   122138   +   Operon_30
+       gene108   122299   123504   ‐   Operon_30
+       gene109   123889   126090   +   Operon_31
+       gene110   126356   126913   ‐   Operon_31
+       gene111   127281   128687   +   Operon_31
+       gene112   128757   129668   ‐   Operon_32
+
+####   The average recombination tract length can be simulated and optimized using the script "sweep_lg_simulation.sh" in the package. 
+####    The maximum inter-SNP distance is used to optimize the identification of clusters. Multiple gene sweeping events with large distances may occur in the same gene/gene operon. This parameter will split the cluster if any inter-SNP distance is greater than the specified threshold. This value may depend on the specific species. Default value is set to 1000 bp, which should be a good value for bacterial genomes.
     
 
 ### subcommands[Pval]:
