@@ -2,7 +2,7 @@
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
 ## Running SweepCluster
-### Usage: SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan}
+### Usage:  SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan}
 
 #### Command line usage                        
     -h, --help          Whow the help message.
@@ -13,7 +13,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
                         cluster SNPs.
 
 ### Calculate SNP density using the sliding window method
-#### Usage: SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
+#### Usage:  SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
 
 #### {arguments}
     -h, --help      Show the help message and exit.
@@ -27,7 +27,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 
 
 ###  Perform SNP clustering based on anchor-extension method
-#### Usage: SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
+#### Usage:  SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
 
 #### {arguments}
     -h, --help            Show the help message and exit.
@@ -62,7 +62,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     
 
 ### Estimate the significance p-value of each cluster based on a gamma distribution model of SNPs
-#### Usage: SweepCluster.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
+#### Usage:  SweepCluster.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
 
 #### {arguments}
     -h, --help        Show the help message and exit.
@@ -71,9 +71,8 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     -rate RATE        The pre-estimated mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.
 
 
-
 ### Use python module Dbscan to perform blind SNP clustering without considering SNP annotation
-#### Usage: SweepCluster.py Dbscan [-h] -vcf VCF -eps EPS -min_sample MIN_SAMPLE -out OUT
+#### Usage:  SweepCluster.py Dbscan [-h] -vcf VCF -eps EPS -min_sample MIN_SAMPLE -out OUT
 
 #### {arguments}
     -h, --help          Show the help message and exit.
@@ -84,8 +83,8 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 
     
 ### The shell script sweep_lg_simulation.sh is a driver program for simulating the effect of different sweep length on SNP clustering results.
-We found that many factors may influence the clustering results. Sweep length is the most influential one. We evaluate the effect by simulating the dynamics of the number of clusters against the sweep length based on generalized additive model. 
-### Useage: ./sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]   [-min_num MIN_NUM] 
+We found that many factors influence the clustering results. Sweep length is the most influential one. We evaluate the effect by simulating the dynamics of the number of clusters against the sweep length based on generalized additive model. 
+### Useage:  sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]  [-min_num MIN_NUM] 
 
 #### {arguments}
     -vcf VCF              The vcf file
@@ -99,18 +98,14 @@ We found that many factors may influence the clustering results. Sweep length is
     -max_dist MAX_DIST    Maximum inter-SNP distances allowed within a cluster. Default value is set to 1000.
     -min_num MIN_NUM      Minimum number of SNPs per cluster. The default value is set to 2.
  
-## The DBSCAN_simulation.py is used to test the effect of different eps and minimum samples SNP clustering results
-### usage: python DBSCAN_simulation.py [arguments]
-#### {optional arguments}
-    -h, --help            show this help message and exit
-    -vcf VCF              the vcf file
-    -eps_start EPS_START  the start value of eps,The default value is the
-                        minimum of the average distance between SNPS
-    -eps_end EPS_END      the end value of eps,The default value is the maximum
-                        of the average distance between SNPS
-    -sample_start SAMPLE_START
-                        the start value of eps,The default value is 5
-    -sample_end SAMPLE_END
-                        the end value of eps,The default value is 50
+### The DBSCAN_simulation.py is a driver script for simulating the effect of eps and min_num on SNP clustering using Dbscan method.
+### Usage:  DBSCAN_simulation.py -vcf VCF [-eps_start EPS_START] [-eps_end EPS_END] [-min_start MIN_START] [-min_end MIN_END]
+#### {arguments}
+    -h, --help             Show the help message and exit.
+    -vcf VCF               The vcf file.
+    -eps_start EPS_START   The lower-bound of the range of eps. Default value is the minimum of the average distance between SNPS.
+    -eps_end EPS_END       The upper-bound of the range of eps. Default value is the maximum of the average distance between SNPS.
+    -min_start MIN_START   The lower-bound of the range of min_num. Default value is set to 5.
+    -min_end MIN_END       The upper-bound of the range of min_num. Default value is set to 50.
 
     
