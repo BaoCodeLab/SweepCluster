@@ -11,10 +11,10 @@ vcf
 scikit-learn
 multiprocessing
 
-#### here
-     git clone https://github.com/BaoCodeLab/SweepCluster
-     cd SweepCluster
-     pip install .
+####  
+    git clone https://github.com/BaoCodeLab/SweepCluster
+    cd SweepCluster
+    pip install .
     
 
 
