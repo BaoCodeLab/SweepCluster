@@ -2,7 +2,7 @@
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
 ## Running SweepCluster
-### Usage: SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan} 
+### Usage: SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan}
 
 #### Command line usage                        
     -h, --help          show the help message
@@ -57,20 +57,18 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
        gene111   127281   128687   +   Operon_31
        gene112   128757   129668   ‐   Operon_32
 
-####   The average recombination tract length can be simulated and optimized using the script "sweep_lg_simulation.sh" in the package. 
+####   The average sweeping length can be simulated and optimized using the script "sweep_lg_simulation.sh" in the package. 
 ####    The maximum inter-SNP distance is used to optimize the identification of clusters. Multiple gene sweeping events with large distances may occur in the same gene/gene operon. This parameter will split the cluster if any inter-SNP distance is greater than the specified threshold. This value may depend on the specific species. Default value is set to 1000 bp, which should be a good value for bacterial genomes.
     
 
-### subcommands[Pval]:
-#### usage: Maketest.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
+### Estimate the significance p-value of each cluster based on a gamma distribution model of SNPs
+#### usage: SweepCluster.py Pval [-h] -cluster CLUSTER -out OUT -rate RATE
 
-#### {optional arguments}
-    -h, --help        show this help message and exit
-    -cluster CLUSTER  the snp clustering file
-    -out OUT          the output file .
-    -rate RATE        it is a pre-estimated average mutation rate under the null
-                    hypothesis that the SNPs are independently and randomly
-                    distributed.
+#### {arguments}
+    -h, --help        Show the help message and exit
+    -cluster CLUSTER  The snp clustering file
+    -out OUT          The output file.
+    -rate RATE        The pre-estimated mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.
 
 
 
