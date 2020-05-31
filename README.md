@@ -10,7 +10,10 @@ pandas
 vcf
 scikit-learn
 multiprocessing
-    
+
+   git clone https://github.com/BaoCodeLab/SweepCluster
+   cd SweepCluster
+   pip install .
     
 
 
