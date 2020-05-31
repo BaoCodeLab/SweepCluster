@@ -26,7 +26,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
  
 
 
-###  Perform SNP clustering using anchor-extension method
+###  Perform SNP clustering based on anchor-extension method
 #### Usage: SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON [-sweep_lg SWEEP_LG]  [-scan_loop SCAN_LOOP]  [-min_num MIN_NUM]  [-max_dist MAX_DIST]
 
 #### {arguments}
@@ -82,24 +82,8 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     -min_num MIN_NUM    Minimum number of SNPs in a neighborhood for a SNP to be considered as a core SNP.
     -out OUT            The output file.
 
-
-## The recomb_lg_simulation.sh is used to test the effect of different recombination length SNP clustering results
-We find that there are many factors that influence the clustering results.Recombination length has the greatest effect, which directly affects the number of cluster
-### Useage:./recomb_lg_simulation.sh [arguments]
-
-#### {optional arguments}
-    -vcf VCF              The vcf file
-    -anno ANNO            The tab-delimited file containing the annotation of the SNPs.
-    -operon OPERON        The tab-delimited file defining the gene operons.
-    -start START          The lower-bound of the range of sweep length used for simulation.
-    -end END              The upper-bound of the range of sweep length used for simulation.
-    -step STEP            The step size of sweep length ranging from START to END in simulation.
-    -delta DELTA          interv is used to obtain the first and second derivatives of the clustering model by using the finite difference method.
-    -scan_loop SCAN_LOOP  The number of iterations the program will perform for merging clusters. Default value is set to 100.
-    -max_dist MAS_DIST    maximum inter-SNP distance allowed within a cluster. 
-    -min_num MIN_NUM      minimum number of SNPs per cluster. The default value is set to 2.
     
-## The shell script sweep_lg_simulation.sh is a driver program for simulating the effect of different sweep length on SNP clustering results.
+### The shell script sweep_lg_simulation.sh is a driver program for simulating the effect of different sweep length on SNP clustering results.
 We found that many factors may influence the clustering results. Sweep length is the most influential one. We evaluate the effect by simulating the dynamics of the number of clusters against the sweep length based on generalized additive model. 
 ### Useage: ./sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]   [-min_num MIN_NUM] 
 
