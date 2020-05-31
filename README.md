@@ -12,22 +12,22 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
     Dbscan              The machine learning python module DBSACN was used to
                         cluster SNPs
 
-### Calculate the SNP density
-#### SweepCluster.py Density [-h] -vcf VCF -out OUT [-scale SCALE] -step STEP -win WINDOW -length LENGTH  
+### Calculate SNP density using the sliding window method
+#### SweepCluster.py Density [-h] -vcf VCF -out OUT  [-scale SCALE]  [-step STEP]  [-win WINDOW]  [-length LENGTH]  
 
 #### {arguments}
-    -h, --help    show this help message and exit
-    -vcf VCF      the vcf file
-    -out OUT      the output file
-    -scale SCALE  the value for normalization of the SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.
+    -h, --help      show this help message and exit
+    -vcf VCF        the vcf file
+    -out OUT        the output file
+    -scale SCALE    the value for normalization of SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.
     -length LENGTH  the total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.
-    -step STEP    the step size of the sliding window method. If not defined, default value of 300 will be used.
-    -win WINDOW        the window size of the sliding window method. If not defined, default value of 2000 will be used.
+    -step STEP      the step size of the sliding window method. If not defined, default value of 300 will be used.
+    -win WINDOW     the window size of the sliding window method. If not defined, default value of 2000 will be used.
  
 
 
-### subcommands[Cluster]:
-#### usage: Maketest.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON
+### Perform SNP clustering using anchor-extension method
+#### SweepCluster.py Cluster [-h] -vcf VCF -out OUT -anno ANNO -operon OPERON
                            -recomb_lg RECOMB_LG [-scan_loop SCAN_LOOP]
                            [-max_dist MAX_DIST] [-min_num MIN_NUM]
 
