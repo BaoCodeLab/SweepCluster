@@ -2,7 +2,7 @@ import argparse
 from library.Density import density
 from library.cluster import cluster
 from library.Pval import Pval
-from library.Dbscan import DBSCA
+from library.Dbscan import DBSCAN
 
 
 if __name__=="__main__":
