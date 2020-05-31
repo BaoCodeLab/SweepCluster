@@ -98,6 +98,22 @@ We find that there are many factors that influence the clustering results.Recomb
     -scan_loop SCAN_LOOP  The number of iterations the program will perform for merging clusters. Default value is set to 100.
     -max_dist MAS_DIST    maximum inter-SNP distance allowed within a cluster. 
     -min_num MIN_NUM      minimum number of SNPs per cluster. The default value is set to 2.
+    
+## The shell script sweep_lg_simulation.sh is a driver program for simulating the effect of different sweep length on SNP clustering results.
+We found that many factors may influence the clustering results. Sweep length is the most influential one. We evaluate the effect by simulating the dynamics of the number of clusters against the sweep length based on generalized additive model. 
+### Useage: ./sweep_lg_simulation.sh -vcf VCF -anno ANNO -operon OPERON -start START -end END -step STEP -delta DELTA [-scan_loop SCAN_LOOP] [-max_dist MAX_DIST]   [-min_num MIN_NUM] 
+
+#### {arguments}
+    -vcf VCF              The vcf file
+    -anno ANNO            The tab-delimited file containing the annotation of the SNPs.
+    -operon OPERON        The tab-delimited file defining the gene operons.
+    -start START          The lower-bound of the range of sweep length used for simulation.
+    -end END              The upper-bound of the range of sweep length used for simulation.
+    -step STEP            The step size of sweep length ranging from START to END in simulation.
+    -delta DELTA          The small difference used for approximation of the first and second derivatives in the finite difference method.
+    -scan_loop SCAN_LOOP  The number of iterations the clustering program will perform for merging clusters. Default value is set to 100.
+    -max_dist MAX_DIST    Maximum inter-SNP distances allowed within a cluster. Default value is set to 1000.
+    -min_num MIN_NUM      Minimum number of SNPs per cluster. The default value is set to 2.
  
 ## The DBSCAN_simulation.py is used to test the effect of different eps and minimum samples SNP clustering results
 ### usage: python DBSCAN_simulation.py [arguments]
