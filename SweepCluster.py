@@ -43,7 +43,7 @@ if __name__=="__main__":
 
     
     ###### Defines the parameters of the subprocess for clusterting the SNPs by DBSCAN
-    DBSCAN_parser=subparsers.add_parser("DBSCAN",help="Use python module Dbscan to perform blind SNP clustering without considering SNP annotation")
+    DBSCAN_parser=subparsers.add_parser("Dbscan",help="Use python module Dbscan to perform blind SNP clustering without considering SNP annotation")
     DBSCAN_parser.add_argument("-vcf", required=True, help="The vcf file")
     DBSCAN_parser.add_argument("-eps",required=True,help="ϵ - The neighborhood distance threshold for any two SNPs.")
     DBSCAN_parser.add_argument("-min_sample",required=True,help="Minimum number of SNPs in a neighborhood for a SNP to be considered as a core SNP.")
