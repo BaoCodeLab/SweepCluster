@@ -2,7 +2,7 @@ import argparse
 from library.Density import density
 from library.cluster import cluster
 from library.Pval import Pval
-from library.Dbscan import DBSCAN
+from library.Dbscan import DBSCA
 
 
 if __name__=="__main__":
@@ -46,7 +46,7 @@ if __name__=="__main__":
     DBSCAN_parser=subparsers.add_parser("Dbscan",help="Use python module Dbscan to perform blind SNP clustering without considering SNP annotation")
     DBSCAN_parser.add_argument("-vcf", required=True, help="The vcf file")
     DBSCAN_parser.add_argument("-eps",required=True,help="ϵ - The neighborhood distance threshold for any two SNPs.")
-    DBSCAN_parser.add_argument("-min_sample",required=True,help="Minimum number of SNPs in a neighborhood for a SNP to be considered as a core SNP.")
+    DBSCAN_parser.add_argument("-min_num",required=True,help="Minimum number of SNPs in a neighborhood for a SNP to be considered as a core SNP.")
     DBSCAN_parser.add_argument("-out",required=True,help="the output file")
     DBSCAN_parser.set_defaults(func=DBSCA)
     args = parser.parse_args()
