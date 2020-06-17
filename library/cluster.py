@@ -826,10 +826,10 @@ def cluster(args):
     else:
         operon_file=args_dic["operon"]
     
-    if(args_dic["recomb_lg"]==None):
+    if(args_dic["sweep_lg"]==None):
         raise Exception("Please input the estimated recombination tract length.")
     else:
-        recomb_lg=int(args_dic["recomb_lg"])
+        recomb_lg=int(args_dic["sweep_lg"])
     
     if(args_dic["scan_loop"]==None):
         scan_loop = 100
