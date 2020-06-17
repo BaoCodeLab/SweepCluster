@@ -14,7 +14,7 @@ if __name__=="__main__":
     density_parser.add_argument("-vcf", required=True, help="the vcf file")
     density_parser.add_argument("-out", required=True, help="the output file")
     density_parser.add_argument("-scale", help="The value for normalization of SNP density. The SNP density is calculated as the total number of SNPs in each window normalized to a unit length. If not defined, default value of 1000 will be used.")
-    density_parser.add_argument("-total", help="The total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.")
+    density_parser.add_argument("-length", help="The total length of the genome. This value is useful for calculation of the SNP density at the boundaries. If not defined, the location of the last SNP in the input file will be used.")
     density_parser.add_argument("-step", help="The step size of the sliding window method. If not defined, default value of 300 will be used.")
     density_parser.add_argument("-win", help="The window size of the sliding window method. If not defined, default value of 2000 will be used.")
     density_parser.set_defaults(func=density)
