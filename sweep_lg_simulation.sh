@@ -9,10 +9,6 @@ echo
 while [ -n "$1" ]
 do
 	case "$1" in
-		-h)
-                        echo "recomb_lg_test.sh -vcf vcf_file -anno anno_file -operon operon_file -rate mutation_rate -start recomb_lg_start -end recomb_lg_end -size recomb_lg_step_size -interv gam_model_interv_value "
-			exit 10
-                        shift;;
 		-vcf)	param="$2"
 			vcf_file=$2
 			echo "The vcf file is $2"
@@ -33,11 +29,11 @@ do
 			end_num=$2
 			echo "The end recombination length is $2"
 			shift ;;
-		-size) param="$2"
+		-step) param="$2"
 			step_size=$2
 			echo "The step size of recombination length is $2"
 			shift ;;
-		-interv) param="$2"
+		-delta) param="$2"
 			interv=$2
 			echo "The gam model interv value is $2"
 			shift ;;
@@ -79,7 +75,7 @@ echo $(seq $start_num $step_size $end_num)
 
 func()
 {
-	python MakeTest.py cluster -vcf $2 -anno $3 -operon $4 -recomb_lg $1 -out $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8
+	python SweepCluster.py Cluster -vcf $2 -anno $3 -operon $4 -sweep_lg $1 -out $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8
 }
 export -f func
 
