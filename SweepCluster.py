@@ -38,7 +38,7 @@ if __name__=="__main__":
     Pval_parser=subparsers.add_parser("Pval",help="Estimate the significance p-value of each cluster based on a gamma distribution model of SNPs")   
     Pval_parser.add_argument("-cluster", required=True, help="The snp clustering result file.")
     Pval_parser.add_argument("-out", required=True,help="the output file")
-    Pval_parser.add_argument("-rate",required=True,The pre-estimated mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.")
+    Pval_parser.add_argument("-rate",required=True,help="The pre-estimated mutation rate under the null hypothesis that the SNPs are independently and randomly distributed.")
     Pval_parser.set_defaults(func=Pval)
 
     
