@@ -9,12 +9,18 @@ def calu_density(vcf_file,out_file,genome_length=0,step_size=300,window_size=200
     print("the snp density file is :",os.path.abspath(out_file))
     
     loc_dic = {}
-    vcf_reader=vcf.Reader(filename =vcf_file)
     loc=[]
-    
-    for record in vcf_reader:
-        loc.append(record.POS)
-    loc.sort()
+    try:
+        vcf_reader=vcf.Reader(filename =vcf_file)
+        for record in vcf_reader:
+            loc.append(int(record.POS))
+        loc.sort()
+    except:
+        for pos in open(vcf_file):
+            POS = int(pos)
+            loc.append(POS)
+        loc.sort()
+   
     
     for i in loc:
         loc_dic[i]=1
@@ -88,11 +94,11 @@ def density(args):
     else:
         out_file = args_dic["out"]
         
-    if(args_dic["total"]==None):
+    if(args_dic["length"]==None):
         tot_lg = 0
         print("No total genome size is provided; the maximum location of SNPs will be used!")
     else:
-        tot_lg=int(args_dic["total"])
+        tot_lg=int(args_dic["length"])
         
     if(args_dic["step"]==None):
         stp = 300
@@ -100,11 +106,11 @@ def density(args):
     else:
         stp=int(args_dic["step"])
         
-    if(args_dic["ws"]==None):
+    if(args_dic["win"]==None):
         wind = 2000
         print("No window size is provided; default value of 2000 will be used!")
     else:
-        wind=int(args_dic["ws"])
+        wind=int(args_dic["win"])
         
     if(args_dic["scale"]==None):
         scale = 1000

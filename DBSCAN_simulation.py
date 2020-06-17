@@ -10,11 +10,11 @@ import os
 
 def DBSCAN_test(args):
     pars = argparse.ArgumentParser()
-    pars.add_argument("-vcf", required=True, help="the vcf file")
-    pars.add_argument("-eps_start", help="the start value of eps,The default value is the minimum of the average distance between SNPS")
-    pars.add_argument("-eps_end", help="the end value of eps,The default value is the maximum of the average distance between SNPS")
-    pars.add_argument("-sample_start", help="the start value of eps,The default value is 5")
-    pars.add_argument("-sample_end", help="the end value of eps,The default value is 50")
+    pars.add_argument("-vcf", required=True, help="The vcf file.")
+    pars.add_argument("-eps_start",help="The lower-bound of the range of eps. Default value is the minimum of the average distance between SNPS.")
+    pars.add_argument("-eps_end", ,help="The upper-bound of the range of eps. Default value is the maximum of the average distance between SNPS.")
+    pars.add_argument("-min_start", help="The lower-bound of the range of min_num. Default value is set to 5.")
+    pars.add_argument("-min_end", help=" The upper-bound of the range of min_num. Default value is set to 50.")
     args = pars.parse_args()
     
     if args.vcf:
@@ -37,25 +37,31 @@ def DBSCAN_test(args):
         print("No eps_end is provided; the maximum of the average distance between SNPS will be used!")
         eps_end=0
         
-    if args.sample_start:
-        sample_start_dx = sys.argv.index("-sample_start")
+    if args.min_start:
+        sample_start_dx = sys.argv.index("-min_start")
         sample_start = int(sys.argv[sample_start_dx + 1])
     else:
         print("No min_sample start is provided; default value of 5 will be used!")
         sample_start=5
         
-    if args.sample_end:
-        sample_end_dx = sys.argv.index("-sample_end")
+    if args.min_end:
+        sample_end_dx = sys.argv.index("-min_end")
         sample_end = int(sys.argv[sample_end_dx + 1])
     else:
         print("No min_sample end is provided; default value of 50 will be used!")
         sample_end=50
         
-    vcf_reader=vcf.Reader(filename =vcf_file)
     loc=[]
-    for record in vcf_reader:
-        loc.append(record.POS)
-    loc.sort()
+    try:
+        vcf_reader = vcf.Reader(filename=vcf_file)
+        for record in vcf_reader:
+            loc.append(int(record.POS))
+        loc.sort()
+    except:
+        for pos in open(vcf_file):
+            POS = int(pos)
+            loc.append(POS)
+        loc.sort()
     
     #Calculate the distance between the two SNPS
     one_list=[]
@@ -88,10 +94,10 @@ def DBSCAN_test(args):
         aver=dist_sum*1.0/size
         aver_list.append(aver)
         
-    if(eps_start!=0):
+    if(eps_start==0):
         eps_start=int(min(aver_list))
         print("The minimum of the average distance of SNPS is:",min(aver_list))
-    if(eps_end!=0):
+    if(eps_end==0):
         eps_end=int(max(aver_list))
         print("The maximum of the average distance of SNPs is :",max(aver_list))
         
