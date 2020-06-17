@@ -27,7 +27,7 @@ if __name__=="__main__":
     cluster_parser.add_argument("-snp", required=True, help="The output file of snps after clustering")
     cluster_parser.add_argument("-anno", required=True,help="Tab-delimited file containing the annotations for the SNPs")
     cluster_parser.add_argument("-operon", required=True,help="Tab-delimited file defining the gene operons")
-    cluster_parser.add_argument("-recomb_lg", required=True,help="The estimated average sweep length in the genome")
+    cluster_parser.add_argument("-sweep_lg", required=True,help="The estimated average sweep length in the genome")
     cluster_parser.add_argument("-scan_loop",help="The number of iterations the program will perform for merging clusters. Default value is set to 100.")
     cluster_parser.add_argument("-max_dist",help="Maximum inter-SNP distances allowed within a cluster. Default value is set to 4000 bp")
     cluster_parser.add_argument("-min_num", help="Minimum number of SNPs per cluster. Default value is set to 2.")
