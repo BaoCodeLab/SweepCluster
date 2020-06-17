@@ -87,7 +87,7 @@ rm log.txt
 echo "The result of the relationship between recombination length and the cluster number are saved in recomb_result.txt"
 
 echo "Start to run R program and use generalized additive model and linear model to fit the data"
-Rscript ./library/recomb_lg_Rscript $interv
+Rscript ./library/sweep_lg_Rscript $interv
 rm recomb.txt
 echo "The description of the R program is stored in Rcode_log.txt"
 echo "The results of the R program run are saved in Rplots.pdf"
