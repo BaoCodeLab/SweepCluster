@@ -17,10 +17,10 @@ def DBSCA(args):
     else:
         eps=int(args_dic["eps"])
         
-    if(args_dic["min_sample"]==None):
+    if(args_dic["min_num"]==None):
         raise Exception("Please provide the value of min_sample!")
     else:
-        min_sample=int(args_dic["min_sample"])
+        min_sample=int(args_dic["min_num"])
         
     if (args_dic["out"] == None):
         raise Exception("Please provide the output file!")
@@ -28,11 +28,17 @@ def DBSCA(args):
         out_file = args_dic["out"]
         
         
-    vcf_reader = vcf.Reader(filename=vcf_file)
     loc = []
-    
-    for record in vcf_reader:
-        loc.append(record.POS)
+    try:
+        vcf_reader = vcf.Reader(filename=vcf_file)
+        for record in vcf_reader:
+            loc.append(int(record.POS))
+        loc.sort()
+    except:
+        for pos in open(vcf_file):
+            POS = int(pos)
+            loc.append(POS)
+        loc.sort()
         
     loc.sort()
     loc = numpy.array(loc)
