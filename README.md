@@ -65,7 +65,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
        261896    inter-gene      -      gene242-gene243
        262321    CDS_synon       oppF   gene243
        
-####   The operon file defines the genes in each operon with one line for each gene. Each gene contains five columns, i.e., gene ID, the start location of the gene, the end location of the gene, the orientation of the gene, and the operon ID the gene belongs to. If the gene operons of the genome have not yet defined well, the column of operon ID could be replaced by the gene ID. However, the well-defined gene operons will be helpful for SNP clustering. 
+####   The operon file defines the genes in each operon with one line for each gene. Each gene contains five columns, i.e., gene ID, the start location of the gene, the end location of the gene, the orientation of the gene, and the operon ID the gene belongs to. If the gene operons of the genome have not yet been defined well, the column of operon ID could be replaced by the gene ID. However, the well-defined gene operons will be helpful for SNP clustering. 
        gene107   121551   122138   +   Operon_30
        gene108   122299   123504   ‐   Operon_30
        gene109   123889   126090   +   Operon_31
