@@ -289,8 +289,6 @@ def func_snpDistAry(func_snpLst,direct,sign,dist_dic,distRev_dic):
 
 
 
-
-
 ###The SNP cluster was merged
 def cluster_merge(targetClustRev_dic,dist_dic,distRev_dic,snp_AllPos,targetClust_dic,recomb_lg,scan_loop,targetOperon_dic,max_dist_cluster,min_num_snp,targetAnno_dic):
     tab_annoPos, tab_snpType, tab_geneNam, tab_geneID = 0, 1, 2, 3
@@ -838,8 +836,8 @@ def cluster(args):
         scan_loop=int(args_dic["scan_loop"])
     
     if(args_dic["max_dist"]==None):
-        max_dist_cluster = 5000
-        print("No max_dist_cluster is provided, default value of 5000 bp will be used.")
+        max_dist_cluster = 1000
+        print("No max_dist_cluster is provided, default value of 1000 bp will be used.")
     else:
         max_dist_cluster=int(args_dic["max_dist"])
     
