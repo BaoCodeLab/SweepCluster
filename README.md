@@ -14,7 +14,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 ####  
     git clone https://github.com/BaoCodeLab/SweepCluster
     cd SweepCluster
-    pip install .
+    python setup.py install
     
 
 ## Running SweepCluster
