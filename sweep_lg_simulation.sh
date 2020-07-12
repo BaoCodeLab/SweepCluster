@@ -75,7 +75,7 @@ echo $(seq $start_num $step_size $end_num)
 
 func()
 {
-	python SweepCluster.py Cluster -vcf $2 -anno $3 -operon $4 -sweep_lg $1 -out $5/snp_cluster_result/clust_out_$1  -scan_loop $6 -max_dist $7 -min_num $8
+	python SweepCluster.py Cluster -vcf $2 -anno $3 -operon $4 -sweep_lg $1 -cluster $5/snp_cluster_result/clust_out_$1 -snp $5/snp_cluster_result/snp_out_$1  -scan_loop $6 -max_dist $7 -min_num $8
 }
 export -f func
 
