@@ -226,7 +226,7 @@ def Operon_manage(operon_file,targetOperon_dic,targetAnno_dic):### profile the g
         operonSNP_lst = targetOperonRev_dic[ech_operon]
         for ech_snp in operonSNP_lst:
             ech_snp_type = targetAnno_dic[ech_snp][tab_snpType - 1]
-            if ech_snp_type == "CDS_nonSynon":
+            if ech_snp_type == "CDS_nonSynon" or ech_snp_type == "upstream":
                 targetClustRev_dic[ech_operon] = operonSNP_lst
                 break
         else:
@@ -713,7 +713,7 @@ def cluster_merge(targetClustRev_dic,dist_dic,distRev_dic,snp_AllPos,targetClust
             ech_snp_NewClust2_type = targetAnno_dic[ech_snp_NewClust2][tab_snpType - 1]
             snp_NewClust2_type += [ech_snp_NewClust2_type]
 
-        if "CDS_nonSynon" not in snp_NewClust2_type:
+        if "CDS_nonSynon" not in snp_NewClust2_type and "upstream" not in snp_NewClust2_type:
             del targetClustRev_dic[ech_NewClust2]
             map(targetClust_dic.__delitem__, filter(targetClust_dic.__contains__, snp_in_NewClust2))
             continue
