@@ -21,7 +21,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
 ### Usage:  SweepCluster.py [-h] {Density,Cluster,Pval,Dbscan}
 
 #### Command line usage                        
-    -h, --help          Whow the help message.
+    -h, --help          Show the help message.
     Density             Calculate the SNP density on the genome.
     Cluster             Perform SNP clustering.
     Pval                Calculate the significance p-value of SNP clustering.
