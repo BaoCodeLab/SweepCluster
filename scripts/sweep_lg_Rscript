@@ -1,0 +1,74 @@
+
+library(mgcv)
+
+cat("reading data","\n")
+args=commandArgs()
+
+recomb_lg=read.table("recomb.txt",header = FALSE,sep = "\t")
+names(recomb_lg)<-c("recomb_lg","cluster_num","max_cluster_size","min_cluster_size","avg_cluster_size")
+recomb_lg<-recomb_lg[order(recomb_lg$recomb_lg),]
+
+write.table(recomb_lg,file = "recomb_result.txt",sep = "\t",quote=FALSE,row.names=FALSE)
+cat("Several different models were used for fitting","\n")
+
+fit1=gam(cluster_num~s(recomb_lg),data=recomb_lg)
+fit2=gam(cluster_num~te(recomb_lg),data=recomb_lg)
+fit3=gam(cluster_num~ti(recomb_lg),data=recomb_lg)
+fit4=gam(cluster_num~t2(recomb_lg),data=recomb_lg)
+fit5=lm(cluster_num~recomb_lg,data = recomb_lg)
+
+cat("Extract R-adjust for different models","\n")
+
+fit1_rsq=summary(fit1)$r.sq
+fit2_rsq=summary(fit2)$r.sq
+fit3_rsq=summary(fit3)$r.sq
+fit4_rsq=summary(fit4)$r.sq
+fit5_rsq=summary(fit5)$r.sq
+
+cat("the R-adjust of gam(cluster_num~s(recomb_lg)) is",fit1_rsq,"\n")
+cat("the R-adjust of gam(cluster_num~te(recomb_lg)) is",fit2_rsq,"\n")
+cat("the R-adjust of gam(cluster_num~ti(recomb_lg)) is",fit3_rsq,"\n")
+cat("the R-adjust of gam(cluster_num~t2(recomb_lg)) is",fit4_rsq,"\n")
+cat("the R-adjust of lm(cluster_num~(recomb_lg)) is",fit5_rsq,"\n")
+
+cat("Compare the R-adjust of the models to select the model with the largest R-adjust","\n")
+
+fit_array=c(fit1_rsq,fit2_rsq,fit3_rsq,fit4_rsq,fit5_rsq)
+index=which.max(fit_array)[1]
+if(index==1) {fit=fit1; cat("so choose the modle--gam(cluster_num~s(recomb_lg))","\n")}
+if(index==2) {fit=fit2; cat("so choose the modle--gam(cluster_num~te(recomb_lg))","\n")}
+if(index==3) {fit=fit3; cat("so choose the modle--gam(cluster_num~ti(recomb_lg))","\n")}
+if(index==4) {fit=fit4; cat("so choose the modle--gam(cluster_num~t2(recomb_lg))","\n")}
+if(index==5) {fit=fit5; cat("so choose the modle--lm(cluster_num~(recomb_lg))","\n")}
+coeff=coef(fit)
+
+plot(recomb_lg$recomb_lg,recomb_lg$cluster_num,main = "the recomb_length for cluster_number",sub ="Figure 1",xlab = "recombination length",ylab="cluster num",cex.lab=1.5,mgp=c(2,0.5,0),cex.axis=1.2)
+plot(fit,main = "the Generalized additive models",col="red",lwd=1,xlab = "recombination length",ylab = "s(recombination length)",sub="Figure 2",cex.lab=1.5,mgp=c(2,0.5,0),cex.axis=1.2)
+plot(recomb_lg$recomb_lg,recomb_lg$cluster_num,main = "the recomb_length for cluster_number",sub ="Figure 3",xlab = "recombination length",ylab="cluster number",cex.lab=1.5,mgp=c(2,0.5,0),cex.axis=1.2)
+lines(recomb_lg$recomb_lg,predict(fit),col="red",lwd=2)
+
+#first-order derivative
+interv=as.numeric(args[6])
+testdata=data.frame(recomb_lg=seq(length=5000,from=100,to=10000))
+y0 <- predict(fit,testdata,type="lpmatrix")
+y1 <- predict(fit,testdata+interv,type="lpmatrix")
+yp <- (y1-y0)/interv
+diff1 <- yp %*% coeff
+plot(testdata$recomb_lg,diff1,main = "First-order derivative",xlab = "recombination length",ylab = "1st-order derivative",sub = "Figure 4",cex.lab=1.5,mgp=c(2,0.5,0),cex.axis=1.2)
+
+#second-order derivative
+y2 <- predict(fit,testdata-interv,type="lpmatrix")
+ypp <- (y2+y1-2*y0)/interv^2
+diff2 <- ypp %*% coeff
+plot(testdata$recomb_lg,diff2,ylim = c(-0.002,0.002),main = "Second-order derivative",xlab = "recombination length",ylab = "2nd-order derivative",sub = "Figure 5",cex.lab=1.5,mgp=c(2,0.5,0),cex.axis=1.2)
+
+
+sink("Rscript_log.txt",append=FALSE,split=TRUE)
+cat("input different recombination length toget different cluster numbers and draw a scatter diagram--Figure 1,where recombination length is the independent variable and cluster numbers is the dependent variable","\n")
+cat("The generalized additive model was used to fit the data and plot--Figure 2","\n")
+cat("The curve of generalized additive model is fitted to figure 1--Figure 3","\n")
+cat("In order to calculate the first and second derivatives of generalized additive model by finite difference method,5000 recombination lengths ranging from 100 to 10000 are randomly generated first,Then the generalized additive model is used to predict the corresponding cluster Numbers","\n")
+cat("interval=1e-3","\n")
+cat("the first derivative of generalized additive model is shown in figure 4","\n")
+cat("The second derivative of generalized additive model is shown in figure 5","\n")
+sink()
