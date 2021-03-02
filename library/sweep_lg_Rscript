@@ -1,4 +1,4 @@
-#!/root/soft/R-3.5.2/bin/Rscript
+
 library(mgcv)
 
 cat("reading data","\n")
