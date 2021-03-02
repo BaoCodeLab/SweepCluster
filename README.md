@@ -2,14 +2,18 @@
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
 ## Install
-### Requirements
-  * Python > 3.7
+### Python dependencies
+  * Python >= 3.7
   * scipy
   * numpy 
   * pandas  
   * PyVCF  
   * scikit-learn
   * multiprocessing
+### R dependencies
+  * R >= 3.5
+  * mgcv
+  * rgl
 
 ####  
     git clone https://github.com/BaoCodeLab/SweepCluster
