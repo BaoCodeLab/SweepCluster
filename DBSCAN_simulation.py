@@ -57,17 +57,21 @@ def DBSCAN_test(args):
         for record in vcf_reader:
             loc.append(int(record.POS))
         loc.sort()
+        
     except:
         for pos in open(vcf_file):
             POS = int(pos)
             loc.append(POS)
         loc.sort()
     
+    
     #Calculate the distance between the two SNPS
     one_list=[]
     two_list=[]
+    
     for i in range(1,len(loc),2):
         one_list.append(loc[i])
+        
     for i in range(0,len(loc),2):
         two_list.append(loc[i])
         
@@ -81,11 +85,14 @@ def DBSCAN_test(args):
         dist=one_list[i]-two_list[i]
         snp_dist.append(dist)
         
+        
     #Calculate the mean distance between SNPS, the maximum distance and the minimum distance
     size=2000
     num_list=[]
+    
     for i in range(0,len(snp_dist),size):
         num_list.append(i)
+        
     aver_list=[]
     for i in range(0,len(num_list)-1):
         dist_sum=0
@@ -97,6 +104,7 @@ def DBSCAN_test(args):
     if(eps_start==0):
         eps_start=int(min(aver_list))
         print("The minimum of the average distance of SNPS is:",min(aver_list))
+        
     if(eps_end==0):
         eps_end=int(max(aver_list))
         print("The maximum of the average distance of SNPs is :",max(aver_list))
@@ -109,26 +117,32 @@ def DBSCAN_test(args):
     loc=np.array(loc)
     x=loc.reshape(-1,1)
     
+    
     def cal_std(eps,min_sample,loc):
         y_pred = DBSCAN(eps= eps, min_samples = min_sample).fit_predict(x)
         cluster_num=(max(y_pred))
         loc=list(loc)
         y_pred=y_pred.tolist()
+        
         std_sum=0
         data_dic={}
         data_dic["loc"]=loc
         data_dic["index"]=y_pred
         data_df=pd.DataFrame(data_dic)
         data_df=data_df.groupby("index")
+        
         for i in range(0,cluster_num+1):
             std_sum+=(data_df.get_group(i)["loc"].std())
+            
         if(cluster_num==0):
             aver_std=0
         else:
             aver_std=(std_sum/cluster_num)
+            
         with open(r"log.txt","a+") as f:
             print("%d\t%d\t%d\t%.3f" %(eps,min_sample,cluster_num,aver_std),file=f)
-            
+ 
+
     pool = mp.Pool(mp.cpu_count())
     print(pool)
     for eps in range(eps_start,eps_end,size):
