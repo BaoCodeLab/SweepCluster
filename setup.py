@@ -10,3 +10,4 @@ setup(
     packages=find_packages(),
     python_requires=">3.7.0",
     install_requires=["numpy >= 1.17","scipy >= 1.4","pandas >= 1.1.4","PyVCF","scikit-learn >= 0.22"]
+)
