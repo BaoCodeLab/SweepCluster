@@ -129,4 +129,7 @@ We found that many factors influence the clustering results. Sweep length is the
     -min_start MIN_START   The lower-bound of the range of min_num. Default value is set to 5.
     -min_end MIN_END       The upper-bound of the range of min_num. Default value is set to 50.
 
-    
+
+## Citation
+### Bao YJ, Shapiro J, Lee SW, Ploplis V, and Castellino F. (2016) Phenotypic differentiation of Streptococcus pyogenes populations is induced by recombination-driven gene-specific sweeps.  Sci. Rep. 6:36644. 
+### Qiu J, Zhou Q, Ye W, Chen Q, and Bao YJ (2021) SweepCluster: A SNP clustering tool for detecting gene-specific sweeps in prokaryotes. doi: https://doi.org/10.1101/2021.03.12.435060.
