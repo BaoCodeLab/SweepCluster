@@ -131,5 +131,5 @@ We found that many factors influence the clustering results. Sweep length is the
 
 
 ## Citation
-### Bao YJ, Shapiro J, Lee SW, Ploplis V, and Castellino F. (2016) Phenotypic differentiation of Streptococcus pyogenes populations is induced by recombination-driven gene-specific sweeps.  Sci. Rep. 6:36644. 
-### Qiu J, Zhou Q, Ye W, Chen Q, and Bao YJ (2021) SweepCluster: A SNP clustering tool for detecting gene-specific sweeps in prokaryotes. doi: https://doi.org/10.1101/2021.03.12.435060.
+#### Bao YJ, Shapiro J, Lee SW, Ploplis V, and Castellino F. Phenotypic differentiation of Streptococcus pyogenes populations is induced by recombination-driven gene-specific sweeps.  Sci. Rep. 2016, 6:36644. 
+#### Qiu J, Zhou Q, Ye W, Chen Q, and Bao YJ. SweepCluster: A SNP clustering tool for detecting gene-specific sweeps in prokaryotes. 2021. doi: https://doi.org/10.1101/2021.03.12.435060.
