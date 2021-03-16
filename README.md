@@ -1,7 +1,7 @@
 # SweepCluster
 SweepCluster is a python library and toolkit for implementation of SNP clustering and significance estimation based on the anchor-extension method.
 
-## Install
+## Dependencies
 ### Python dependencies
   * Python >= 3.7
   * scipy
@@ -15,6 +15,7 @@ SweepCluster is a python library and toolkit for implementation of SNP clusterin
   * mgcv
   * rgl
 
+## Install
 ####  
     git clone https://github.com/BaoCodeLab/SweepCluster
     cd SweepCluster
